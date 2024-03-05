@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<main id="main" class="main">
+
+    <div class="pagetitle">
+        <h1>Checkout Order</h1>
+        <nav>
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="">Home</a></li>
+            <li class="breadcrumb-item active">Checkout Order</li>
+          </ol>
+        </nav>
+    </div><!-- End Page Title -->
+
+    <section>
+        <div class="card">
+            <div class="card-body">
+
+
+              <!-- Floating Labels Form -->
+              <form class="row pt-4 g-3" method="post">
+                {% csrf_token %}
+                <div class="col-md-6">
+                  <div class="form-floating">
+                    <input type="text" class="form-control" id="floatingEmail" name="name" placeholder="Your Email">
+                    <label for="floatingEmail">Your Name</label>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-floating">
+                    <input type="Number" class="form-control" id="floatingEmail" name="phone" placeholder="Your Email">
+                    <label for="floatingEmail">Your Phone Number</label>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="form-floating">
+                    <textarea class="form-control" placeholder="Address" name="venue" id="floatingTextarea" style="height: 100px;"></textarea>
+                    <label for="floatingTextarea">Venue Address</label>
+                  </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-floating">
+                    <input type="date" name="date" class="form-control" required>
+                    <label for="inputDate" >Date</label>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-floating">
+                    <input type="time" name="time" class="form-control" required>
+                    <label for="inputDate" >Time</label>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="form-floating">
+                    <input type="Number" name="count" class="form-control">
+                    <label for="inputDate" >Guests Count</label>
+                    </div>
+                </div>
+                
+                <div class="text-center">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                  <button type="reset" class="btn btn-secondary">Reset</button>
+                </div>
+              </form><!-- End floating Labels Form -->
+
+            </div>
+          </div>
+    </section>
+
+
+</main>
+
+
+{% endblock content %}

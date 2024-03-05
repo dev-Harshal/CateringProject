@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<main id="main" class="main">
+
+    <div class="pagetitle">
+        <h1>Cart</h1>
+        <nav>
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="">Home</a></li>
+            <li class="breadcrumb-item active">Cart</li>
+          </ol>
+        </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section">
+        {% if items|length == 100 %}
+        
+        <div class="card">
+            <div class="card-body text-center">
+              <h5 class="card-title"><i class="bi bi-cart-x-fill"></i> Cart Empty</h5>
+              <a href="{% url "home-page" %}"><button type="button" class="btn btn-primary"><i class="bi bi-cart"></i> Add Menu</button></a>
+            </div>
+          </div><!-- End Card with an image on top -->
+        </div>
+
+        {% else %}
+         
+
+        <div class="card">
+            <div class="card-body ">
+              
+              <h5 class="card-title"><i class="bi bi-cart"></i></h5>
+              
+              <form method="post">
+                {% csrf_token %}
+                <strong>Add Guest Count:</strong> <input type="number" placeholder="Guest Count" name="count" >
+                <button type="submit">Ok</button>
+            </form>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">Type</th>
+                        <th scope="col">Category</th>
+                        <th scope="col">Item</th>
+                        <th scope="col">Price</th>
+                        <th scope="col"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                        {% for item in items  %}
+                        
+                        <tr>
+                            <td>{{item.dish.option.category.title}}</td>
+                            <td>{{item.dish.option.title}}</td>
+                            <td>{{item.dish.name}}</td>
+                            <td>{{item.dish.price}}</td>
+                            <td>
+                                <a href="{% url "add_to_cart" item.dish.id %}">
+                                    <button type="button" class="btn btn-danger">
+                                      <i class="bi bi-cart-dash"></i> Remove
+                                    </button>
+                                  </a>
+                            </td>
+                        </tr>
+                        
+                        {% endfor %}
+
+                    </tbody>
+                </table>
+
+                <hr>
+                    <div class="row justify-content-end">
+                        <div class="col-lg-2 col-md-3 label "><strong>Total:</strong></div>
+                        <div class="col-lg-2 col-md-3">&#8377;{{total}}</div>
+                    </div>
+                    
+                    <div class="row justify-content-center">
+                        <div class="col-3">
+                          <a href="{% url "book_order" %}"><button  class="btn btn-primary" type="submit">Place Order</button></a>
+                        </div>
+                        
+                    </div>
+            </div>
+          </div><!-- End Card with an image on top -->
+        </div>
+        
+        {% endif %}
+    </section>
+
+
+</main>
+
+
+{% endblock content %}
